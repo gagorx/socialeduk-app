@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="411dp"
+        android:layout_height="88dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.003">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/layout_friendsInvite_icon"
+                    android:layout_width="75dp"
+                    android:layout_height="82dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/ic_iconunieduk_foreground" />
+
+                <TextView
+                    android:id="@+id/layout_friendsInvite_name"
+                    android:layout_width="156dp"
+                    android:layout_height="32dp"
+                    android:text="nome"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toEndOf="@+id/layout_friendsInvite_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/layout_friendsInvite_email"
+                    android:layout_width="155dp"
+                    android:layout_height="33dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="20dp"
+                    android:text="email"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/layout_friendsInvite_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_friendsInvite_name" />
+
+                <ImageButton
+                    android:id="@+id/layout_friendsInvite_blockButton"
+                    android:layout_width="53dp"
+                    android:layout_height="41dp"
+                    android:layout_marginEnd="4dp"
+                    android:backgroundTint="@color/design_default_color_primary"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_friendsInvite_refuseButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/layout_friendsInvite_refuseButton"
+                    app:srcCompat="@drawable/ic_block" />
+
+                <ImageButton
+                    android:id="@+id/layout_friendsInvite_addButton"
+                    android:layout_width="50dp"
+                    android:layout_height="42dp"
+                    android:backgroundTint="@color/design_default_color_primary"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_add"
+                    tools:layout_editor_absoluteX="241dp" />
+
+                <ImageButton
+                    android:id="@+id/layout_friendsInvite_refuseButton"
+                    android:layout_width="53dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/design_default_color_primary"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/layout_friendsInvite_addButton"
+                    app:layout_constraintStart_toEndOf="@+id/layout_friendsInvite_addButton"
+                    app:srcCompat="@drawable/ic_close" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
