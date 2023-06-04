@@ -11,28 +11,34 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.Volley;
+import com.example.socialeduk.MainActivity;
 import com.example.socialeduk.R;
 import com.example.socialeduk.interfaces.VolleyCallBack;
+import com.example.socialeduk.models.dto.DefaultResponse;
 import com.example.socialeduk.models.dto.LoginRequest;
-import com.example.socialeduk.models.entities.ResponseLogin;
 import com.example.socialeduk.services.AuthService;
-import com.example.socialeduk.user.User;
+import com.example.socialeduk.models.entities.User;
+import com.example.socialeduk.sharedpreferences.UserPreferences;
 import com.example.socialeduk.views.feed.FeedActivity;
 import com.example.socialeduk.views.register.RegisterActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class LoginActivity extends AppCompatActivity {
 
     private AuthService authService;
+    private UserPreferences userPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_login_screen);
+
+        authService = new AuthService(Volley.newRequestQueue(this));
+        userPref = new UserPreferences(this);
 
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
@@ -42,8 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         Button login = findViewById(R.id.LoginScreen_login_button);
-        login.setOnClickListener(view -> login(getEmail(), getPassword(), sharedPref));
-
+        login.setOnClickListener(view -> trylogin(getEmail(), getPassword()));
+//login(getEmail(), getPassword(), sharedPref)
         Button newAccount = findViewById(R.id.LoginScreen_newAccount_button);
         newAccount.setOnClickListener(view -> startNewAccount());
     }
@@ -84,28 +90,39 @@ public class LoginActivity extends AppCompatActivity {
         }else{
 
             LoginRequest login =  new LoginRequest(email, password);
+            DefaultResponse<String> loginResponse = new DefaultResponse<>();
+
 
             try{
                 authService.login(login, new VolleyCallBack() {
                     @Override
                     public void onSuccess(String response) {
+                        JSONObject obj = null;
+                        JSONObject user;
                         try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            rs.setStatus(jsonObject.getString("status"));
-                            rs.setMessage(jsonObject.getString("message"));
-
+                            obj = (JSONObject) new
+                                    JSONTokener(response).nextValue();
+                            loginResponse.setMessage(obj.getString("message"));
+                            loginResponse.setStatus(obj.getString("status"));
+                            user = obj.getJSONObject("data");
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            throw new RuntimeException(e);
                         }
 
-                        if (rs.getStatus().equals("success")){
-                            User user = new User();
-                            user
+                        if (loginResponse.getStatus().equals("success")){
+                            userPref.setUserJson(user.toString());
+                            Toast.makeText(LoginActivity.this, "Login realizado com sucesso.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, userPref.getId().toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, userPref.getName(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, userPref.getPassword(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, userPref.getEmail(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, userPref.getUsername(), Toast.LENGTH_LONG).show();
+                        } else if (loginResponse.getStatus().equals("error")) {
+                            Toast.makeText(LoginActivity.this, "Email ou senha incorretos", Toast.LENGTH_LONG).show();
+                        }else {
+                            Toast.makeText(LoginActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                                    "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                         }
-
-
-                        Toast.makeText(LoginActivity.this, "Login realizado com sucesso.", Toast.LENGTH_LONG).show();
-                        finish();
                     }
 
                     @Override
@@ -120,6 +137,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+
 
     private String getEmail() {
         EditText ra = findViewById(R.id.LoginScreen_inputEmail_plainText);

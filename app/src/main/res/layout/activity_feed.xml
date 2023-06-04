@@ -164,13 +164,27 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="401dp"
-        android:layout_height="92dp"
+        android:id="@+id/feed_postContent_editText"
+        android:layout_width="303dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="160dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="144dp" />
+        android:hint="Digite sua postagem..."
+        android:inputType="textMultiLine"
+        android:maxLines="4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/feed_createPost_button"
+        android:layout_width="94dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp"
+        android:text="POSTAR"
+        app:layout_constraintBottom_toBottomOf="@+id/feed_postContent_editText"
+        app:layout_constraintStart_toEndOf="@+id/feed_postContent_editText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

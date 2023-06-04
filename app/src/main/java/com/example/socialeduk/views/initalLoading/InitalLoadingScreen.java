@@ -15,10 +15,10 @@ public class InitalLoadingScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_inital_loading_screen);
 
-        getSupportActionBar().hide();
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 

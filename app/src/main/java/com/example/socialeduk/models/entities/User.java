@@ -1,15 +1,18 @@
-package com.example.socialeduk.user;
+package com.example.socialeduk.models.entities;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.Toast;
 
 public class User {
 
-    int id;
-    String username;
-    String password;
-    String name;
-    String email;
+    private Long id;
+    private String username;
+    private String password;
+    private String name;
+    private String email;
 
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -29,7 +32,7 @@ public class User {
         return email;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
