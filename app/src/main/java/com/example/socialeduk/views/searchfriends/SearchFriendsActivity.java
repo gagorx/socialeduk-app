@@ -14,6 +14,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_search_friends);
 
         ImageButton back = findViewById(R.id.searchFriends_back_button);

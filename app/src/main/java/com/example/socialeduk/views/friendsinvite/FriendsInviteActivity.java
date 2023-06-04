@@ -15,6 +15,7 @@ public class FriendsInviteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_friends_invite);
 
         ImageButton back = findViewById(R.id.friendsInvite_back_button);

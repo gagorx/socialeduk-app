@@ -9,7 +9,9 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.example.socialeduk.apienv.APIEnv;
 import com.example.socialeduk.interfaces.VolleyCallBack;
+import com.example.socialeduk.models.dto.DefaultResponse;
 import com.example.socialeduk.models.dto.LoginRequest;
+import com.example.socialeduk.user.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,13 +29,15 @@ public class AuthService {
 
 
 
-    public void login(LoginRequest login, VolleyCallBack callback)throws JSONException {
+    public DefaultResponse<User> login(LoginRequest login, VolleyCallBack callback)throws JSONException {
         String url = env.getURI() + "login";
 
         JSONObject jsonBody = new JSONObject();
         jsonBody.put("email", login.getEmail());
         jsonBody.put("password", login.getPassword());
 
+
+        DefaultResponse<User> respObj = new DefaultResponse<>();
 
         final String json = jsonBody.toString();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -53,6 +57,7 @@ public class AuthService {
             public String getBodyContentType() {
                 return "application/json; charset=utf-8";
             }
+
             @Override
             public byte[] getBody() throws AuthFailureError {
                 try {
@@ -65,5 +70,7 @@ public class AuthService {
 
         };
         _queue.add(stringRequest);
+
+        return respObj;
     }
 }

@@ -23,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_register);
 
         registerService = new RegisterService(Volley.newRequestQueue(this));
@@ -73,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private void startLoginScreen() {
-        startActivity(new Intent(this, LoginActivity.class));
+//        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 

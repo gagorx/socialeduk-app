@@ -10,18 +10,19 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="379dp"
-        android:layout_height="251dp"
+        android:layout_width="377dp"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@mipmap/ic_iconunieduk_foreground"
-        tools:layout_editor_absoluteY="2dp" />
+        tools:layout_editor_absoluteY="3dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="220dp"
         android:text="SocialEduk"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,11 +87,11 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginBottom="4dp"
         android:text="Usuário:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintBottom_toTopOf="@+id/registerScreen_inputUsername_plainText"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/registerScreen_inputUsername_plainText"

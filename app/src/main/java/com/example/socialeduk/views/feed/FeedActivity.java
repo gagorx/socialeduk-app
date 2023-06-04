@@ -43,6 +43,7 @@ public class FeedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_feed);
 
         //botoes animados
@@ -146,7 +147,7 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     private void _logout() {
-        startActivity(new Intent(this, LoginActivity.class));
+//        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 }
