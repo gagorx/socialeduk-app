@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.socialeduk.R;
+import com.example.socialeduk.sharedpreferences.UserPreferences;
 import com.example.socialeduk.views.feed.FeedActivity;
 
 public class FriendsInviteActivity extends AppCompatActivity {
@@ -15,7 +16,6 @@ public class FriendsInviteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_friends_invite);
 
         ImageButton back = findViewById(R.id.friendsInvite_back_button);
@@ -23,7 +23,6 @@ public class FriendsInviteActivity extends AppCompatActivity {
 
         ImageButton home = findViewById(R.id.friendsInvite_home_button);
         home.setOnClickListener(v -> startFeed());
-
     }
 
     private void startFeed() {

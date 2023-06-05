@@ -35,7 +35,7 @@
                     tools:layout_editor_absoluteY="0dp" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/feed_nameUserLogged_textView"
                     android:layout_width="113dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="12dp"
@@ -53,7 +53,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    app:layout_constraintStart_toEndOf="@+id/textView7"
+                    app:layout_constraintStart_toEndOf="@+id/feed_nameUserLogged_textView"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@android:drawable/ic_dialog_email" />
 

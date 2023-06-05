@@ -5,27 +5,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Region;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.Volley;
 import com.example.socialeduk.R;
 import com.example.socialeduk.interfaces.VolleyCallBack;
 import com.example.socialeduk.models.dto.Post;
-import com.example.socialeduk.models.dto.UserRegister;
 import com.example.socialeduk.services.PostService;
 import com.example.socialeduk.sharedpreferences.UserPreferences;
 import com.example.socialeduk.views.events.EventsActivity;
 import com.example.socialeduk.views.friendsinvite.FriendsInviteActivity;
 import com.example.socialeduk.views.groups.GroupsActivity;
 import com.example.socialeduk.views.login.LoginActivity;
-import com.example.socialeduk.views.register.RegisterActivity;
 import com.example.socialeduk.views.searchfriends.SearchFriendsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -56,14 +54,13 @@ public class FeedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_feed);
 
         //services
         user = new UserPreferences(FeedActivity.this);
         postService = new PostService(Volley.newRequestQueue(this));
 
-        //botoes animados
+        //botoes animados e textView
         logout = findViewById(R.id.feed_logout_button);
         logout.setOnClickListener(view -> _logout());
 
@@ -75,6 +72,12 @@ public class FeedActivity extends AppCompatActivity {
 
         friendRequests = findViewById(R.id.feed_friendRequest_button);
         friendRequests.setOnClickListener(view -> startFriendsRequestsActivity());
+
+        TextView nameUserLogged = findViewById(R.id.feed_nameUserLogged_textView);
+        nameUserLogged.setText(user.getUsername());
+
+        TextView emailUserLogged = findViewById(R.id.feed_emailUserLogged_textView);
+        emailUserLogged.setText(user.getEmail());
 
 
         //animacoes
@@ -167,7 +170,8 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     private void _logout() {
-//        startActivity(new Intent(this, LoginActivity.class));
+        user.logout();
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
@@ -180,7 +184,6 @@ public class FeedActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(String response) {
                         Toast.makeText(FeedActivity.this, "Post realizado com sucesso!", Toast.LENGTH_LONG).show();
-                        finish();
                     }
 
                     @Override

@@ -40,47 +40,20 @@ public class LoginActivity extends AppCompatActivity {
         authService = new AuthService(Volley.newRequestQueue(this));
         userPref = new UserPreferences(this);
 
-
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        loadData(sharedPref);
-        if (!getEmail().equals("") && !getPassword().equals("")){
-            login(getEmail(), getPassword(), sharedPref);
+        //sharedPreferences para login automatico
+        loadData(userPref.getEmail(), userPref.getPassword());
+        if (!getEmail().equals("") || !getPassword().equals("")){
+            trylogin(getEmail(), getPassword());
         }
 
+        //botoes da tela
         Button login = findViewById(R.id.LoginScreen_login_button);
         login.setOnClickListener(view -> trylogin(getEmail(), getPassword()));
-//login(getEmail(), getPassword(), sharedPref)
+
         Button newAccount = findViewById(R.id.LoginScreen_newAccount_button);
         newAccount.setOnClickListener(view -> startNewAccount());
     }
 
-    private void startNewAccount() {
-        startActivity(new Intent(this, RegisterActivity.class));
-//        finish();
-    }
-
-    public void loadData(SharedPreferences preferences){
-        ((EditText) findViewById(R.id.LoginScreen_inputEmail_plainText)).setText(preferences.getString("email",""));
-        ((EditText) findViewById(R.id.LoginScreen_inputPassword_plainText)).setText(preferences.getString("password",""));
-    }
-
-    public void savePreferences(SharedPreferences preferences){
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("email",((EditText) findViewById(R.id.LoginScreen_inputEmail_plainText)).getText().toString());
-        editor.putString("password",((EditText) findViewById(R.id.LoginScreen_inputPassword_plainText)).getText().toString());
-
-        editor.commit();
-    }
-
-    private void login(String email, String password, SharedPreferences sharedPref){
-        if (email.equals("admin") && (password.equals("admin"))) {
-            savePreferences(sharedPref);
-            startActivity(new Intent(this, FeedActivity.class));
-//            finish();
-        }else{
-            showToast("Usuario ou senha incorretos");
-        }
-    }
     private void trylogin(String email, String password) {
 
         if (email.isEmpty() || email.equals(" ")){
@@ -112,11 +85,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (loginResponse.getStatus().equals("success")){
                             userPref.setUserJson(user.toString());
                             Toast.makeText(LoginActivity.this, "Login realizado com sucesso.", Toast.LENGTH_LONG).show();
-                            Toast.makeText(LoginActivity.this, userPref.getId().toString(), Toast.LENGTH_LONG).show();
-                            Toast.makeText(LoginActivity.this, userPref.getName(), Toast.LENGTH_LONG).show();
-                            Toast.makeText(LoginActivity.this, userPref.getPassword(), Toast.LENGTH_LONG).show();
-                            Toast.makeText(LoginActivity.this, userPref.getEmail(), Toast.LENGTH_LONG).show();
-                            Toast.makeText(LoginActivity.this, userPref.getUsername(), Toast.LENGTH_LONG).show();
+                            startFeed();
+
                         } else if (loginResponse.getStatus().equals("error")) {
                             Toast.makeText(LoginActivity.this, "Email ou senha incorretos", Toast.LENGTH_LONG).show();
                         }else {
@@ -138,18 +108,32 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private void startFeed() {
+        startActivity(new Intent(this, FeedActivity.class));
+        finish();
+    }
+
+    private void startNewAccount() {
+        startActivity(new Intent(this, RegisterActivity.class));
+        finish();
+    }
 
 
     private String getEmail() {
-        EditText ra = findViewById(R.id.LoginScreen_inputEmail_plainText);
-        String raString = ra.getText().toString();
-        return raString;
+        EditText email = findViewById(R.id.LoginScreen_inputEmail_plainText);
+        String emailString = email.getText().toString();
+        return emailString;
     }
 
     private String getPassword(){
         EditText password = findViewById(R.id.LoginScreen_inputPassword_plainText);
         String passwordString = password.getText().toString();
         return passwordString;
+    }
+
+    public void loadData(String email, String password){
+        ((EditText) findViewById(R.id.LoginScreen_inputEmail_plainText)).setText(email);
+        ((EditText) findViewById(R.id.LoginScreen_inputPassword_plainText)).setText(password);
     }
 
     private void showToast(String message) {

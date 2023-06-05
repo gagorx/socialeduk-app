@@ -25,6 +25,12 @@ public class UserPreferences {
         editor.apply();
     }
 
+    public void logout(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_USER, null);
+        editor.apply();
+    }
+
     public String getUserJson() {
         return sharedPreferences.getString(KEY_USER, null);
     }

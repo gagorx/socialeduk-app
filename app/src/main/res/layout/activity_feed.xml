@@ -88,27 +88,25 @@
                     tools:layout_editor_absoluteY="0dp" />
 
                 <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="113dp"
+                    android:id="@+id/feed_nameUserLogged_textView"
+                    android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:text="Usuario1"
                     android:textSize="24sp"
                     app:layout_constraintStart_toEndOf="@+id/imageView6"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/imageButton2"
+                <TextView
+                    android:id="@+id/feed_emailUserLogged_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    app:layout_constraintStart_toEndOf="@+id/textView7"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:drawable/ic_dialog_email" />
+                    android:layout_marginTop="8dp"
+                    android:text="email"
+                    app:layout_constraintStart_toStartOf="@+id/feed_nameUserLogged_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/feed_nameUserLogged_textView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -167,23 +165,24 @@
         android:id="@+id/feed_postContent_editText"
         android:layout_width="303dp"
         android:layout_height="74dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="156dp"
         android:ems="10"
         android:hint="Digite sua postagem..."
         android:inputType="textMultiLine"
         android:maxLines="4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/feed_createPost_button"
-        android:layout_width="94dp"
-        android:layout_height="54dp"
+        android:layout_width="88dp"
+        android:layout_height="50dp"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:text="POSTAR"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/feed_postContent_editText"
         app:layout_constraintStart_toEndOf="@+id/feed_postContent_editText" />
 

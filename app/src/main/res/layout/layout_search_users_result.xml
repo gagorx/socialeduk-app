@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="411dp"
@@ -26,8 +26,9 @@
 
                 <ImageView
                     android:id="@+id/layout_resultSearchUsers_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="4dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -35,51 +36,51 @@
 
                 <TextView
                     android:id="@+id/layout_resultSearchUsers_name"
-                    android:layout_width="156dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:text="nome"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/layout_resultSearchUsers_icon"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/layout_resultSearchUsers_email"
-                    android:layout_width="155dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="33dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="12dp"
                     android:text="email"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/layout_resultSearchUsers_icon"
                     app:layout_constraintTop_toBottomOf="@+id/layout_resultSearchUsers_name" />
 
                 <ImageButton
-                    android:id="@+id/layout_resultSearchUsers_blockButton"
-                    android:layout_width="63dp"
-                    android:layout_height="54dp"
-                    android:layout_marginEnd="4dp"
-                    android:backgroundTint="@color/purple_500"
-                    android:tint="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.531"
-                    app:srcCompat="@drawable/ic_block" />
-
-                <ImageButton
                     android:id="@+id/layout_resultSearchUsers_addButton"
-                    android:layout_width="63dp"
-                    android:layout_height="56dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_width="48dp"
+                    android:layout_height="39dp"
+                    android:layout_marginEnd="12dp"
                     android:backgroundTint="@color/purple_500"
                     android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/layout_resultSearchUsers_blockButton"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.533"
+                    app:layout_constraintVertical_bias="0.51"
                     app:srcCompat="@drawable/ic_add" />
+
+                <ImageButton
+                    android:id="@+id/layout_resultSearchUsers_blockButton"
+                    android:layout_width="48dp"
+                    android:layout_height="39dp"
+                    android:layout_marginEnd="20dp"
+                    android:backgroundTint="@color/purple_500"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.51"
+                    app:srcCompat="@drawable/ic_block" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

@@ -2,12 +2,15 @@ package com.example.socialeduk.models.dto;
 
 public class LoginRequest {
 
-    private String password;
     private String email;
 
-    public LoginRequest(String password, String email) {
-        this.password = password;
+    private String password;
+
+
+    public LoginRequest(String email, String password) {
         this.email = email;
+        this.password = password;
+
     }
 
     public String getEmail() {

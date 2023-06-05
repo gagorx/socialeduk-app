@@ -26,7 +26,7 @@ public class PostService {
     }
 
     public void createPost(Post post , VolleyCallBack callback)throws JSONException {
-        String url = env.getURI() + "/api/posts/";
+        String url = env.getURI() + "/posts/";
 
         JSONObject jsonBody = new JSONObject();
         jsonBody.put("userId", post.getUserId());

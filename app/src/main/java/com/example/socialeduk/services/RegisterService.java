@@ -26,7 +26,7 @@ public class RegisterService {
     }
 
     public void register(UserRegister register, VolleyCallBack callback)throws JSONException {
-        String url = env.getURI() + "/users/register";
+        String url = env.getURI() + "/register";
 
         JSONObject jsonBody = new JSONObject();
         jsonBody.put("username", register.getUsername());

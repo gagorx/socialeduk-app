@@ -23,7 +23,6 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_register);
 
         registerService = new RegisterService(Volley.newRequestQueue(this));
@@ -32,12 +31,12 @@ public class RegisterActivity extends AppCompatActivity {
         back.setOnClickListener(v -> startLoginScreen());
 
         Button register = findViewById(R.id.registerScreen_register_button);
-        register.setOnClickListener(v -> tryRegister(getUsername(), getName(), getEmail(), getPassword()));
+        register.setOnClickListener(v -> tryRegister(getUsername(), getPassword(), getName(), getEmail()));
 
     }
 
 
-    private void tryRegister(String username, String name, String email, String password) {
+    private void tryRegister(String username, String password, String name, String email ) {
 
 
         if (username.isEmpty() || username.equals(" ")){
@@ -49,14 +48,14 @@ public class RegisterActivity extends AppCompatActivity {
         }else if (password.isEmpty() || password.equals(" ")) {
            Toast.makeText(this, "O EMAIL NAO PODE ESTAR VAZIO", Toast.LENGTH_LONG).show();
         }else{
-            UserRegister user =  new UserRegister(username, name, email, password);
+            UserRegister user =  new UserRegister(username, password, name, email);
 
             try{
                 registerService.register(user, new VolleyCallBack() {
                     @Override
                     public void onSuccess(String response) {
                         Toast.makeText(RegisterActivity.this, "Cadastro realizado! Faça o Login.", Toast.LENGTH_LONG).show();
-                        finish();
+                        startLoginScreen();
                     }
 
                     @Override
@@ -74,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private void startLoginScreen() {
-//        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 

@@ -7,7 +7,7 @@
     tools:context=".views.searchfriends.SearchFriendsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/searchFriends_listUsers_recicleView"
         android:layout_width="389dp"
         android:layout_height="576dp"
         android:layout_marginBottom="16dp"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/searchFriends_inputSearch_editText"
         android:layout_width="243dp"
         android:layout_height="45dp"
         android:layout_marginTop="24dp"
@@ -46,9 +46,9 @@
         android:layout_height="50dp"
         android:src="@drawable/baseline_search_24"
         android:tint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName2"
+        app:layout_constraintBottom_toBottomOf="@+id/searchFriends_inputSearch_editText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toEndOf="@+id/searchFriends_inputSearch_editText" />
 
     <ImageButton
         android:id="@+id/searchFriends_home_button"
