@@ -15,6 +15,7 @@ import com.example.socialeduk.interfaces.VolleyCallBack;
 import com.example.socialeduk.models.dto.DefaultResponse;
 import com.example.socialeduk.models.entities.User;
 import com.example.socialeduk.services.UserService;
+import com.example.socialeduk.sharedpreferences.UserPreferences;
 import com.example.socialeduk.views.feed.FeedActivity;
 import com.example.socialeduk.views.feed.FeedAdapter;
 import com.example.socialeduk.views.feed.FeedContent;
@@ -32,6 +33,8 @@ public class SearchFriendsActivity extends AppCompatActivity {
 
     private UserService userService;
 
+    private UserPreferences userPreferences;
+
 
 
     @Override
@@ -39,6 +42,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friends);
 
+        userPreferences = new UserPreferences(SearchFriendsActivity.this);
         userService = new UserService(Volley.newRequestQueue(this));
 
         ImageButton back = findViewById(R.id.searchFriends_back_button);
@@ -58,8 +62,11 @@ public class SearchFriendsActivity extends AppCompatActivity {
         listUser = users.getData();
 
         for(int i=0; i < listUser.size(); i++){
-            searchContent.add(new SearchUserContent(listUser.get(i).getName(),listUser.get(i).getEmail()));
+            if (!listUser.get(i).getId().toString().equals(userPreferences.getId().toString())){
+                searchContent.add(new SearchUserContent(listUser.get(i).getName(), listUser.get(i).getEmail(), userPreferences.getId(), listUser.get(i).getId(), SearchFriendsActivity.this));
+            }
         }
+
 
         return searchContent;
     }

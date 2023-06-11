@@ -17,7 +17,9 @@ import android.widget.Toast;
 import com.android.volley.toolbox.Volley;
 import com.example.socialeduk.R;
 import com.example.socialeduk.interfaces.VolleyCallBack;
+import com.example.socialeduk.models.dto.DefaultResponse;
 import com.example.socialeduk.models.dto.Post;
+import com.example.socialeduk.models.entities.User;
 import com.example.socialeduk.services.PostService;
 import com.example.socialeduk.sharedpreferences.UserPreferences;
 import com.example.socialeduk.views.events.EventsActivity;
@@ -25,6 +27,7 @@ import com.example.socialeduk.views.friendsinvite.FriendsInviteActivity;
 import com.example.socialeduk.views.groups.GroupsActivity;
 import com.example.socialeduk.views.login.LoginActivity;
 import com.example.socialeduk.views.searchfriends.SearchFriendsActivity;
+import com.example.socialeduk.views.searchfriends.SearchUserContent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
@@ -110,6 +113,20 @@ public class FeedActivity extends AppCompatActivity {
         feed.setAdapter(feedAdapter);
         feed.setLayoutManager(new LinearLayoutManager(this));
 
+    }
+
+    private ArrayList<FeedContent> createFeedContentArray(DefaultResponse<ArrayList<Post>> posts) {
+        ArrayList<FeedContent> postContent = new ArrayList<>();
+        ArrayList<Post> listPost;
+        listPost = posts.getData();
+
+        for(int i=0; i < listPost.size(); i++){
+                postContent.add(new FeedContent(listUser.get(i).getName(), listUser.get(i).getEmail(), userPreferences.getId(), listUser.get(i).getId(), SearchFriendsActivity.this));
+            }
+
+
+
+        return postContent;
     }
 
 
