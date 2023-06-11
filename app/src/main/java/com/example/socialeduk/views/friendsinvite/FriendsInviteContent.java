@@ -1,20 +1,27 @@
 package com.example.socialeduk.views.friendsinvite;
 
+import android.content.Context;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 public class FriendsInviteContent {
 
+    public Long id;
+    public Long myId;
     public int icon;
     public String name;
     public String email;
     public ImageButton acceptFriend;
     public ImageButton blockFriend;
     public ImageButton refuseFriend;
+    public Context context;
 
-    public FriendsInviteContent(String friendName, String friendEmail) {
+    public FriendsInviteContent(Long id, Long myId, String friendName, String friendEmail, Context context) {
+        this.id = id;
+        this.myId = myId;
         this.name = friendName;
         this.email = friendEmail;
+        this.context = context;
     }
 
     public void setFriendIcon(int friendIcon) {
@@ -33,16 +40,16 @@ public class FriendsInviteContent {
         return email;
     }
 
-    public void acceptInvite(){
 
-
+    public Long getMyId() {
+        return myId;
     }
 
-    public void refuseInvite(){
-
+    public Context getContext() {
+        return context;
     }
 
-    public void blockInvite(){
-
+    public Long getId() {
+        return id;
     }
 }

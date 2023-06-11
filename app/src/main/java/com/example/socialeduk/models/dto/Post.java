@@ -1,29 +1,36 @@
 package com.example.socialeduk.models.dto;
 
+import com.example.socialeduk.models.entities.User;
+
 public class Post {
-    private Long userId;
-    private String Content;
+    private Long id;
 
-    public Post(Long userId, String content) {
-        this.userId = userId;
-        Content = content;
+    private String content;
+
+    private User user;
+
+
+    public Long getId() {
+        return id;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getContent() {
-        return Content;
+        return content;
     }
 
     public void setContent(String content) {
-        Content = content;
+        this.content = content;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

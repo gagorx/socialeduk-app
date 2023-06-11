@@ -21,23 +21,24 @@ import com.example.socialeduk.models.dto.DefaultResponse;
 import com.example.socialeduk.models.dto.Post;
 import com.example.socialeduk.models.entities.User;
 import com.example.socialeduk.services.PostService;
+import com.example.socialeduk.services.UserService;
 import com.example.socialeduk.sharedpreferences.UserPreferences;
 import com.example.socialeduk.views.events.EventsActivity;
 import com.example.socialeduk.views.friendsinvite.FriendsInviteActivity;
 import com.example.socialeduk.views.groups.GroupsActivity;
 import com.example.socialeduk.views.login.LoginActivity;
 import com.example.socialeduk.views.searchfriends.SearchFriendsActivity;
-import com.example.socialeduk.views.searchfriends.SearchUserContent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class FeedActivity extends AppCompatActivity {
-
-    //arrayList para o feed
-    private ArrayList<FeedContent> arrayList;
 
     //botoes e animacoes
     private Animation rotateOpen;
@@ -50,8 +51,9 @@ public class FeedActivity extends AppCompatActivity {
     private FloatingActionButton friendRequests;
     private boolean clicked = false;
 
-    UserPreferences user;
+    UserPreferences userPreferences;
     PostService postService;
+    UserService userService;
 
 
     @Override
@@ -60,8 +62,9 @@ public class FeedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feed);
 
         //services
-        user = new UserPreferences(FeedActivity.this);
+        userPreferences = new UserPreferences(FeedActivity.this);
         postService = new PostService(Volley.newRequestQueue(this));
+        userService = new UserService(Volley.newRequestQueue(this));
 
         //botoes animados e textView
         logout = findViewById(R.id.feed_logout_button);
@@ -77,10 +80,10 @@ public class FeedActivity extends AppCompatActivity {
         friendRequests.setOnClickListener(view -> startFriendsRequestsActivity());
 
         TextView nameUserLogged = findViewById(R.id.feed_nameUserLogged_textView);
-        nameUserLogged.setText(user.getUsername());
+        nameUserLogged.setText(userPreferences.getUsername());
 
         TextView emailUserLogged = findViewById(R.id.feed_emailUserLogged_textView);
-        emailUserLogged.setText(user.getEmail());
+        emailUserLogged.setText(userPreferences.getEmail());
 
 
         //animacoes
@@ -100,32 +103,80 @@ public class FeedActivity extends AppCompatActivity {
         createPost.setOnClickListener(view -> createPost(getPostcontent()));
 
         //feed
-        arrayList = new ArrayList<>();
-
-        RecyclerView feed = findViewById(R.id.feedActivity_feed_recicleView);
-
-        arrayList.add(new FeedContent(R.drawable.ic_profile_background,"gagagago", R.drawable.ic_launcher_background, "testeeee"));
-        arrayList.add(new FeedContent(R.drawable.ic_profile_background,"gagagago", R.drawable.kid, "testeeee"));
-        arrayList.add(new FeedContent(R.drawable.ic_profile_background,"gagagago", R.drawable.kid, "testeeee"));
-
-        FeedAdapter feedAdapter = new FeedAdapter(arrayList);
-
-        feed.setAdapter(feedAdapter);
-        feed.setLayoutManager(new LinearLayoutManager(this));
+        getAllPosts();
 
     }
 
-    private ArrayList<FeedContent> createFeedContentArray(DefaultResponse<ArrayList<Post>> posts) {
-        ArrayList<FeedContent> postContent = new ArrayList<>();
+    private void getAllPosts() {
+        DefaultResponse<ArrayList<Post>> postList = new DefaultResponse<>();
+        try {
+            postService.getAllFriendsPosts(userPreferences.getId(), new VolleyCallBack() {
+                @Override
+                public void onSuccess(String response) {
+                    try {
+                        JSONObject obj = (JSONObject) new
+                                JSONTokener(response).nextValue();
+
+                        postList.setStatus(obj.getString("status"));
+                        postList.setMessage(obj.getString("message"));
+
+                        JSONArray postJson = obj.getJSONArray("data");
+                        ArrayList<Post> postArrayList = new ArrayList<>();
+
+                        for(int i = 0; i < postJson.length(); i++){
+                            JSONObject ob = new JSONObject(postJson.get(i).toString());
+                            Post newPost = new Post();
+                            JSONObject userJSON;
+                            User user = new User();
+
+                            newPost.setId(ob.getLong("id"));
+                            newPost.setContent(ob.getString("content"));
+
+                            userJSON = ob.getJSONObject("user");
+                            user.setId(userJSON.getLong("id"));
+                            user.setUsername(userJSON.getString("username"));
+                            user.setName(userJSON.getString("name"));
+                            user.setEmail(userJSON.getString("email"));
+
+                            newPost.setUser(user);
+
+                            postArrayList.add(newPost);
+                        }
+
+                        postList.setData(postArrayList);
+
+                        PostAdapter feedAdapter = new PostAdapter(createFeedContentArray(postList));
+
+                        RecyclerView postList = findViewById(R.id.feedActivity_feed_recicleView);
+                        postList.setAdapter(feedAdapter);
+                        postList.setLayoutManager(new LinearLayoutManager(FeedActivity.this));
+
+                    }catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                            "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+                }
+            });
+        }catch(JSONException e) {
+            Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private ArrayList<PostContent> createFeedContentArray(DefaultResponse<ArrayList<Post>> posts) {
         ArrayList<Post> listPost;
         listPost = posts.getData();
+        ArrayList<PostContent> postContent = new ArrayList<>();
 
-        for(int i=0; i < listPost.size(); i++){
-                postContent.add(new FeedContent(listUser.get(i).getName(), listUser.get(i).getEmail(), userPreferences.getId(), listUser.get(i).getId(), SearchFriendsActivity.this));
-            }
-
-
-
+        for (int i = 0; i < listPost.size(); i++) {
+            postContent.add(new PostContent(R.drawable.ic_iconunieduk_background, listPost.get(i).getUser().getUsername(), listPost.get(i).getContent()));
+        }
         return postContent;
     }
 
@@ -187,14 +238,19 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     private void _logout() {
-        user.logout();
+        userPreferences.logout();
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
     private void createPost(String content) {
 
-        Post post = new Post(user.getId(), content);
+        Post post = new Post();
+        User user = new User();
+        user.setId(userPreferences.getId());
+
+        post.setUser(user);
+        post.setContent(content);
 
             try{
                 postService.createPost(post, new VolleyCallBack() {

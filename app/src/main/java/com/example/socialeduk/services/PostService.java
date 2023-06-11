@@ -29,7 +29,7 @@ public class PostService {
         String url = env.getURI() + "/posts/";
 
         JSONObject jsonBody = new JSONObject();
-        jsonBody.put("userId", post.getUserId());
+        jsonBody.put("userId", post.getUser().getId());
         jsonBody.put("content", post.getContent());
 
         final String json = jsonBody.toString();
@@ -62,6 +62,28 @@ public class PostService {
 
         };
         _queue.add(stringRequest);
+    }
+
+    public void getAllFriendsPosts(Long id, VolleyCallBack callback)throws JSONException {
+
+        String url = env.getURI() + "/posts/getAllFriendsPost/" + id;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        callback.onSuccess(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.getMessage());
+                    }
+                });
+
+        _queue.add(stringRequest);
+
     }
 
 }

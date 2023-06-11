@@ -17,9 +17,6 @@ import com.example.socialeduk.models.entities.User;
 import com.example.socialeduk.services.UserService;
 import com.example.socialeduk.sharedpreferences.UserPreferences;
 import com.example.socialeduk.views.feed.FeedActivity;
-import com.example.socialeduk.views.feed.FeedAdapter;
-import com.example.socialeduk.views.feed.FeedContent;
-import com.example.socialeduk.views.login.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +24,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SearchFriendsActivity extends AppCompatActivity {
 

@@ -1,17 +1,16 @@
 package com.example.socialeduk.views.feed;
 
-public class FeedContent {
+public class PostContent {
 
     public int profileIcon;
     public String profileName;
     private int postImage;
-    private String message;
+    private String content;
 
-    public FeedContent(int profileIcon, String profileName, int postImage, String message) {
+    public PostContent(int profileIcon, String profileName, String content) {
         this.profileIcon = profileIcon;
         this.profileName = profileName;
-        this.postImage = postImage;
-        this.message = message;
+        this.content = content;
     }
 
     public int getProfileIcon() {
@@ -38,11 +37,11 @@ public class FeedContent {
         this.postImage = postImage;
     }
 
-    public String getMessage() {
-        return message;
+    public String getContent() {
+        return content;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.content = message;
     }
 }

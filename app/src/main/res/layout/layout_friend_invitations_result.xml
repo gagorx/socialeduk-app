@@ -70,18 +70,20 @@
                     android:id="@+id/layout_friendsInvite_addButton"
                     android:layout_width="50dp"
                     android:layout_height="42dp"
+                    android:layout_marginStart="244dp"
                     android:backgroundTint="@color/design_default_color_primary"
                     android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/layout_friendsInvite_icon"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_add"
-                    tools:layout_editor_absoluteX="241dp" />
+                    app:layout_constraintVertical_bias="0.521"
+                    app:srcCompat="@drawable/ic_add" />
 
                 <ImageButton
                     android:id="@+id/layout_friendsInvite_refuseButton"
                     android:layout_width="53dp"
                     android:layout_height="41dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:backgroundTint="@color/design_default_color_primary"
                     android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/layout_friendsInvite_addButton"

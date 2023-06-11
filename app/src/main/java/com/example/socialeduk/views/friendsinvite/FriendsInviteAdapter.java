@@ -1,22 +1,33 @@
 package com.example.socialeduk.views.friendsinvite;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.toolbox.Volley;
 import com.example.socialeduk.R;
-import com.example.socialeduk.views.feed.FeedAdapter;
-import com.example.socialeduk.views.feed.FeedContent;
+import com.example.socialeduk.interfaces.VolleyCallBack;
+import com.example.socialeduk.models.dto.AcceptAndRefuseFriendRequest;
+import com.example.socialeduk.models.dto.BlockAndSendFriendRequest;
+import com.example.socialeduk.models.dto.DefaultResponse;
+import com.example.socialeduk.services.UserService;
+import com.example.socialeduk.views.groups.GroupsAdapter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.ArrayList;
 
-public class FriendsInviteAdapter {
+public class FriendsInviteAdapter extends RecyclerView.Adapter<FriendsInviteAdapter.ViewHolder>{
 
     private ArrayList<FriendsInviteContent> arrayList;
 
@@ -39,9 +50,154 @@ public class FriendsInviteAdapter {
 
         holder.friendName.setText(invite.getName());
         holder.friendEmail.setText(invite.getEmail());
-        //holder.acceptFriend.setOnClickListener(invite.getPostImage());
-        //holder.blockFriend.setOnClickListener(invite.getMessage());
-        holder.refuseFriend.setOnClickListener(v -> invite.acceptInvite());
+        holder.friendIcon.setImageResource(invite.getFriendIcon());
+        holder.acceptFriend.setOnClickListener(view -> acceptFriendRequest(invite.getMyId(), invite.getId(), invite.getContext(), position));
+        holder.blockFriend.setOnClickListener(view -> blockFriend(invite.getMyId(), invite.getId(), invite.getContext(), position));
+        holder.refuseFriend.setOnClickListener(v -> refuseFriendRequest(invite.getMyId(), invite.getId(), invite.getContext(), position));
+    }
+
+    private void refuseFriendRequest(Long userId, Long friendRequestId, Context context, int position) {
+        AcceptAndRefuseFriendRequest request = new AcceptAndRefuseFriendRequest();
+        request.setUserId(userId);
+        request.setFriendRequestId(friendRequestId);
+
+
+        DefaultResponse<String> acceptResponse = new DefaultResponse<>();
+        UserService userService = new UserService(Volley.newRequestQueue(context));
+
+        try{
+            userService.refuseFriendRequest(request, new VolleyCallBack() {
+                @Override
+                public void onSuccess(String response) {
+                    JSONObject obj = null;
+                    try {
+                        obj = (JSONObject) new
+                                JSONTokener(response).nextValue();
+                        acceptResponse.setMessage(obj.getString("message"));
+                        acceptResponse.setStatus(obj.getString("status"));
+                        acceptResponse.setData(obj.getString("data"));
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    if (acceptResponse.getData().equals("true")){
+                        Toast.makeText(context, "Solicitacao aceita com sucesso", Toast.LENGTH_LONG).show();
+                        arrayList.remove(position);
+                        notifyItemRemoved(position);
+                    } else if (acceptResponse.getData().equals("null")) {
+                        Toast.makeText(context, "Usuario ja bloqueado ou nao encontrado", Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                                "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                            "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+                }
+            });
+        }catch (JSONException e){
+            Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void acceptFriendRequest(Long userId, Long friendRequestId, Context context, int position) {
+        AcceptAndRefuseFriendRequest request = new AcceptAndRefuseFriendRequest();
+        request.setUserId(userId);
+        request.setFriendRequestId(friendRequestId);
+
+
+        DefaultResponse<String> acceptResponse = new DefaultResponse<>();
+        UserService userService = new UserService(Volley.newRequestQueue(context));
+
+        try{
+            userService.acceptFriendRequest(request, new VolleyCallBack() {
+                @Override
+                public void onSuccess(String response) {
+                    JSONObject obj = null;
+                    try {
+                        obj = (JSONObject) new
+                                JSONTokener(response).nextValue();
+                        acceptResponse.setMessage(obj.getString("message"));
+                        acceptResponse.setStatus(obj.getString("status"));
+                        acceptResponse.setData(obj.getString("data"));
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    if (acceptResponse.getData().equals("true")){
+                        Toast.makeText(context, "Solicitacao aceita com sucesso", Toast.LENGTH_LONG).show();
+                        arrayList.remove(position);
+                        notifyItemRemoved(position);
+                    } else if (acceptResponse.getData().equals("null")) {
+                        Toast.makeText(context, "Usuario ja bloqueado ou nao encontrado", Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                                "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                            "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+                }
+            });
+        }catch (JSONException e){
+            Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void blockFriend(Long idSender, Long idRecivier, Context context, int position) {
+        BlockAndSendFriendRequest request = new BlockAndSendFriendRequest();
+        request.setSender(idSender);
+        request.setReceiver(idRecivier);
+
+
+        DefaultResponse<String> blockResponse = new DefaultResponse<>();
+        UserService userService = new UserService(Volley.newRequestQueue(context));
+
+        try{
+            userService.blockUser(request, new VolleyCallBack() {
+                @Override
+                public void onSuccess(String response) {
+                    JSONObject obj = null;
+                    try {
+                        obj = (JSONObject) new
+                                JSONTokener(response).nextValue();
+                        blockResponse.setMessage(obj.getString("message"));
+                        blockResponse.setStatus(obj.getString("status"));
+                        blockResponse.setData(obj.getString("data"));
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    if (blockResponse.getData().equals("true")){
+                        Toast.makeText(context, "Usuario bloqueado com sucesso.", Toast.LENGTH_LONG).show();
+                        arrayList.remove(position);
+                        notifyItemRemoved(position);
+                    } else if (blockResponse.getData().equals("null")) {
+                        Toast.makeText(context, "Usuario ja bloqueado ou nao encontrado", Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                                "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                            "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+                }
+            });
+        }catch (JSONException e){
+            Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    "persistir, contate o administrador", Toast.LENGTH_LONG).show();
+        }
     }
 
     //@Override
@@ -53,6 +209,7 @@ public class FriendsInviteAdapter {
 
         TextView friendName;
         TextView friendEmail;
+        ImageView friendIcon;
         ImageButton acceptFriend;
         ImageButton blockFriend;
         ImageButton refuseFriend;
@@ -61,6 +218,7 @@ public class FriendsInviteAdapter {
 
             friendName = itemView.findViewById(R.id.layout_friendsInvite_name);
             friendEmail = itemView.findViewById(R.id.layout_friendsInvite_email);
+            friendIcon = itemView.findViewById(R.id.layout_friendsInvite_icon);
             acceptFriend = itemView.findViewById(R.id.layout_friendsInvite_addButton);
             blockFriend = itemView.findViewById(R.id.layout_friendsInvite_blockButton);
             refuseFriend = itemView.findViewById(R.id.layout_friendsInvite_refuseButton);
