@@ -219,7 +219,7 @@ public class UserService {
         jsonBody.put("friendRequestId", request.getFriendRequestId());
 
         final String json = jsonBody.toString();
-        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -250,26 +250,6 @@ public class UserService {
         _queue.add(stringRequest);
     }
 
-    public void searchFriendsByName(Long userId, String name, VolleyCallBack callback)throws JSONException {
 
-        String url = env.getURI() + "/users/getNotBlockedUsers/" + userId + "?name=" + name;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        callback.onSuccess(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        callback.onError(error.getMessage());
-                    }
-                });
-
-        _queue.add(stringRequest);
-
-    }
 
 }

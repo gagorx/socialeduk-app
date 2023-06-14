@@ -81,11 +81,11 @@ public class FriendsInviteAdapter extends RecyclerView.Adapter<FriendsInviteAdap
                     }
 
                     if (acceptResponse.getData().equals("true")){
-                        Toast.makeText(context, "Solicitacao aceita com sucesso", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Solicitacao recusada com sucesso", Toast.LENGTH_LONG).show();
                         arrayList.remove(position);
                         notifyItemRemoved(position);
                     } else if (acceptResponse.getData().equals("null")) {
-                        Toast.makeText(context, "Usuario ja bloqueado ou nao encontrado", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Solicitacao ja recusada ou nao encontrada", Toast.LENGTH_LONG).show();
                     }else {
                         Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
                                 "persistir, contate o administrador", Toast.LENGTH_LONG).show();

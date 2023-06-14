@@ -2,12 +2,16 @@ package com.example.socialeduk.models.dto;
 
 import com.example.socialeduk.models.entities.User;
 
+import java.sql.Timestamp;
+
 public class Post {
     private Long id;
 
     private String content;
 
     private User user;
+
+    private Long createAt;
 
 
     public Long getId() {
@@ -32,5 +36,13 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Long createAt) {
+        this.createAt = createAt;
     }
 }

@@ -139,7 +139,6 @@ public class FriendsInviteActivity extends AppCompatActivity {
     }
 
     private void startFeed() {
-        startActivity(new Intent(this, FeedActivity.class));
         finish();
     }
 }

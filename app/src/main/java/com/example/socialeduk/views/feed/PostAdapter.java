@@ -38,6 +38,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.profileName.setText(feed.getProfileName());
         holder.profileIcon.setImageResource(feed.getProfileIcon());
         holder.content.setText(feed.getContent());
+        holder.createdAt.setText(feed.getCreatedAt());
     }
 
     @Override
@@ -50,12 +51,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         ImageView profileIcon;
         TextView profileName;
         TextView content;
+
+        TextView createdAt;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             profileIcon = itemView.findViewById(R.id.feed_profileIcon_imageView);
             profileName = itemView.findViewById(R.id.feed_profileName_textView);
             content = itemView.findViewById(R.id.feed_descriptionPost_textView);
+            createdAt = itemView.findViewById(R.id.feed_createdTime_textView);
         }
     }
 }

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.android.volley.toolbox.Volley;
 import com.example.socialeduk.R;
 import com.example.socialeduk.interfaces.VolleyCallBack;
+import com.example.socialeduk.jodatime.JodaTime;
 import com.example.socialeduk.models.dto.DefaultResponse;
 import com.example.socialeduk.models.dto.Post;
 import com.example.socialeduk.models.entities.User;
@@ -35,6 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -131,6 +133,7 @@ public class FeedActivity extends AppCompatActivity {
 
                             newPost.setId(ob.getLong("id"));
                             newPost.setContent(ob.getString("content"));
+                            newPost.setCreateAt(ob.getLong("createdAt"));
 
                             userJSON = ob.getJSONObject("user");
                             user.setId(userJSON.getLong("id"));
@@ -173,9 +176,13 @@ public class FeedActivity extends AppCompatActivity {
         ArrayList<Post> listPost;
         listPost = posts.getData();
         ArrayList<PostContent> postContent = new ArrayList<>();
+        JodaTime joda = new JodaTime();
+        Instant instant = Instant.parse(timestampString);
 
         for (int i = 0; i < listPost.size(); i++) {
-            postContent.add(new PostContent(R.drawable.ic_iconunieduk_background, listPost.get(i).getUser().getUsername(), listPost.get(i).getContent()));
+            Instant instant = Instant.parse(timestampString)
+            String time = joda.difference(listPost.get(i).getCreateAt());
+            postContent.add(new PostContent(R.mipmap.ic_iconunieduk, listPost.get(i).getUser().getUsername(), listPost.get(i).getContent(), time));
         }
         return postContent;
     }
@@ -206,15 +213,21 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     private void setVisibility(boolean clicked) {
-       if (!clicked){
+        if (!clicked){
             search.setVisibility(View.VISIBLE);
+            search.setEnabled(true);
             friendRequests.setVisibility(View.VISIBLE);
+            friendRequests.setEnabled(true);
             logout.setVisibility(View.VISIBLE);
+            logout.setEnabled(true);
         }else{
             search.setVisibility(View.INVISIBLE);
+            search.setEnabled(false);
             friendRequests.setVisibility(View.INVISIBLE);
+            friendRequests.setEnabled(false);
             logout.setVisibility(View.INVISIBLE);
-       }
+            logout.setEnabled(false);
+        }
     }
 
     private void startGroups() {
@@ -228,13 +241,15 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     private void startFriendsRequestsActivity() {
+        clicked = true;
+        onAddButtonClicked();
         startActivity(new Intent(this, FriendsInviteActivity.class));
-        finish();
     }
 
     private void startSearchAcivity() {
+        clicked = true;
+        onAddButtonClicked();
         startActivity(new Intent(this, SearchFriendsActivity.class));
-        finish();
     }
 
     private void _logout() {
@@ -245,14 +260,18 @@ public class FeedActivity extends AppCompatActivity {
 
     private void createPost(String content) {
 
-        Post post = new Post();
-        User user = new User();
-        user.setId(userPreferences.getId());
+        if (content.isEmpty() || content.equals(" ")) {
+            Toast.makeText(this, "O CONTEUDO DO POST NAO PODE SER VAZIO", Toast.LENGTH_LONG).show();
+        } else {
 
-        post.setUser(user);
-        post.setContent(content);
+            Post post = new Post();
+            User user = new User();
+            user.setId(userPreferences.getId());
 
-            try{
+            post.setUser(user);
+            post.setContent(content);
+
+            try {
                 postService.createPost(post, new VolleyCallBack() {
                     @Override
                     public void onSuccess(String response) {
@@ -265,15 +284,16 @@ public class FeedActivity extends AppCompatActivity {
                                 "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                     }
                 });
-            }catch (JSONException e){
+            } catch (JSONException e) {
                 Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
                         "persistir, contate o administrador", Toast.LENGTH_LONG).show();
             }
         }
+    }
 
-    private String getPostcontent(){
-        EditText postContent = findViewById(R.id.feed_postContent_editText);
-        return postContent.getText().toString();
+        private String getPostcontent(){
+            EditText postContent = findViewById(R.id.feed_postContent_editText);
+            return postContent.getText().toString();
     }
 }
 
