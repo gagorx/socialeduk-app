@@ -78,25 +78,25 @@ public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.
                     }
 
                     if (friendRequestResponse.getData().equals("true")){
-                        Toast.makeText(context, "Solicitacao enviada com sucesso.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Solicitação enviada com sucesso!", Toast.LENGTH_LONG).show();
                         arrayList.remove(position);
                         notifyItemRemoved(position);
                     } else if (friendRequestResponse.getData().equals("null")) {
-                        Toast.makeText(context, "Solicitacao ja enviada ou usuario nao encontrado", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Solicitação já enviada ou usuário não encontrado!", Toast.LENGTH_LONG).show();
                     }else {
-                        Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                        Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                                 "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onError(String error) {
-                    Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                             "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                 }
             });
         }catch (JSONException e){
-            Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+            Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                     "persistir, contate o administrador", Toast.LENGTH_LONG).show();
         }
     }
@@ -126,25 +126,25 @@ public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.
                     }
 
                     if (blockResponse.getData().equals("true")){
-                        Toast.makeText(context, "Usuario bloqueado com sucesso.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Usuário bloqueado com sucesso!", Toast.LENGTH_LONG).show();
                         arrayList.remove(position);
                         notifyItemRemoved(position);
                     } else if (blockResponse.getData().equals("null")) {
-                        Toast.makeText(context, "Usuario ja bloqueado ou nao encontrado", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Usuário já bloqueado ou não encontrado!", Toast.LENGTH_LONG).show();
                     }else {
-                        Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                        Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                                 "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onError(String error) {
-                    Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                             "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                 }
             });
         }catch (JSONException e){
-            Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+            Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                     "persistir, contate o administrador", Toast.LENGTH_LONG).show();
         }
     }

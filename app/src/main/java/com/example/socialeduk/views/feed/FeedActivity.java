@@ -164,12 +164,12 @@ public class FeedActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(String error) {
-                    Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                             "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                 }
             });
         }catch(JSONException e) {
-            Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+            Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                     "persistir, contate o administrador", Toast.LENGTH_LONG).show();
         }
 
@@ -273,7 +273,7 @@ public class FeedActivity extends AppCompatActivity {
     private void createPost(String content) {
 
         if (content.isEmpty() || content.equals(" ")) {
-            Toast.makeText(this, "O CONTEUDO DO POST NAO PODE SER VAZIO", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "O conteúdo do post não pode ser vazio!", Toast.LENGTH_LONG).show();
         } else {
 
             Post post = new Post();
@@ -292,12 +292,12 @@ public class FeedActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(String error) {
-                        Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                        Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                                 "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                     }
                 });
             } catch (JSONException e) {
-                Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                Toast.makeText(FeedActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                         "persistir, contate o administrador", Toast.LENGTH_LONG).show();
             }
         }

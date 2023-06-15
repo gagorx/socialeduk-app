@@ -86,22 +86,22 @@ public class EventsActivity extends AppCompatActivity {
 
         RecyclerView eventRecycle = findViewById(R.id.recyclerView_events);
 
-        eventsList.add(new EventsContent("27", "JULY", "15:00", "ANIVERSARIO LUCAS", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+        eventsList.add(new EventsContent("27", "JULY", "15:00", "Aniversário Lucas", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                 "Cras pulvinar tortor sed diam lobortis convallis. Sed in quam nibh. Suspendisse a ligula quam. Cras faucibus felis vehicula ligula consequat, " +
                 "sit amet suscipit enim eleifend. Pellentesque eu tempor tortor, at varius mi. Nam nisl leo, egestas sed cursus et, aliquet sed libero. " +
                 "Donec elementum metus eu nibh varius"));
 
-        eventsList.add(new EventsContent("31", "DEC", "19:00", "ANIVERSARIO ZE", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+        eventsList.add(new EventsContent("31", "DEC", "19:00", "Aniversário Zé", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                 "Cras pulvinar tortor sed diam lobortis convallis. Sed in quam nibh. Suspendisse a ligula quam. Cras faucibus felis vehicula ligula consequat, " +
                 "sit amet suscipit enim eleifend. Pellentesque eu tempor tortor, at varius mi. Nam nisl leo, egestas sed cursus et, aliquet sed libero. " +
                 "Donec elementum metus eu nibh varius"));
 
-        eventsList.add(new EventsContent("24", "APR", "14:00", "ANIVERSARIO WESLEY", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+        eventsList.add(new EventsContent("24", "APR", "14:00", "Aniversário Wesley", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                 "Cras pulvinar tortor sed diam lobortis convallis. Sed in quam nibh. Suspendisse a ligula quam. Cras faucibus felis vehicula ligula consequat, " +
                 "sit amet suscipit enim eleifend. Pellentesque eu tempor tortor, at varius mi. Nam nisl leo, egestas sed cursus et, aliquet sed libero. " +
                 "Donec elementum metus eu nibh varius"));
 
-        eventsList.add(new EventsContent("12", "JAN", "19:00", "ANIVERSARIO FRIZO", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+        eventsList.add(new EventsContent("12", "JAN", "19:00", "Aniversário Frizo", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                 "Cras pulvinar tortor sed diam lobortis convallis. Sed in quam nibh. Suspendisse a ligula quam. Cras faucibus felis vehicula ligula consequat, " +
                 "sit amet suscipit enim eleifend. Pellentesque eu tempor tortor, at varius mi. Nam nisl leo, egestas sed cursus et, aliquet sed libero. " +
                 "Donec elementum metus eu nibh varius"));

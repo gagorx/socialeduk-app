@@ -141,12 +141,12 @@ public class SearchFriendsActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                Toast.makeText(SearchFriendsActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                Toast.makeText(SearchFriendsActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                         "persistir, contate o administrador", Toast.LENGTH_LONG).show();
             }
         });
             }catch(JSONException e) {
-                Toast.makeText(SearchFriendsActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                Toast.makeText(SearchFriendsActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                     "persistir, contate o administrador", Toast.LENGTH_LONG).show();
             }
 
@@ -195,12 +195,12 @@ public class SearchFriendsActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(String error) {
-                    Toast.makeText(SearchFriendsActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    Toast.makeText(SearchFriendsActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                             "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                 }
             });
         }catch(JSONException e) {
-            Toast.makeText(SearchFriendsActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+            Toast.makeText(SearchFriendsActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                     "persistir, contate o administrador", Toast.LENGTH_LONG).show();
         }
 

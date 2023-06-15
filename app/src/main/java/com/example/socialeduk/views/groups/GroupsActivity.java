@@ -83,9 +83,9 @@ public class GroupsActivity extends AppCompatActivity {
 
         RecyclerView groups = findViewById(R.id.groupsActivity_groupsRecycle);
 
-        arrayList.add(new GroupsContent(R.drawable.wesley, "WesleyBerg Fãs", "Grupo de fans do wesley fantasiado de walter white"));
-        arrayList.add(new GroupsContent(R.drawable.miquelino2, "Amigos do Miquelino", "Grupo de amigos do professor miquelino, aqui só rola churrasco e whyskey 😎😎😎"));
-        arrayList.add(new GroupsContent(R.drawable.tartarugas, "Grupo das Tartarugas Ninja", "nao deixe o mestre splinter saber 🐀🐢🐢🐢🐢"));
+        arrayList.add(new GroupsContent(R.drawable.wesley, "WesleyBerg Fãs", "Grupo de fãs do Wesley fantasiado de Walter White"));
+        arrayList.add(new GroupsContent(R.drawable.miquelino2, "Amigos do Miquelino", "Grupo de amigos do professor Miquelino, aqui só rola churrasco e whyskey 😎😎😎"));
+        arrayList.add(new GroupsContent(R.drawable.tartarugas, "Grupo das Tartarugas Ninja", "Não deixe o mestre Splinter saber 🐀🐢🐢🐢🐢"));
 
 
 

@@ -57,9 +57,9 @@ public class LoginActivity extends AppCompatActivity {
     private void trylogin(String email, String password) {
 
         if (email.isEmpty() || email.equals(" ")){
-            Toast.makeText(this, "O EMAIL NAO PODE ESTAR VAZIO", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "O e-mail não pode estar vazio!", Toast.LENGTH_LONG).show();
         }else if (password.isEmpty() || password.equals(" ")) {
-            Toast.makeText(this, "A SENHA NAO PODE ESTAR VAZIO", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "A senha não pode estar vazia!", Toast.LENGTH_LONG).show();
         }else{
 
             LoginRequest login =  new LoginRequest(email, password);
@@ -84,25 +84,25 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (loginResponse.getStatus().equals("success")){
                             userPref.setUserJson(user.toString());
-                            Toast.makeText(LoginActivity.this, "Login realizado com sucesso.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Login realizado com sucesso!", Toast.LENGTH_LONG).show();
                             startFeed();
 
                         } else if (loginResponse.getStatus().equals("error")) {
-                            Toast.makeText(LoginActivity.this, "Email ou senha incorretos", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "E-mail ou senha incorretos!", Toast.LENGTH_LONG).show();
                         }else {
-                            Toast.makeText(LoginActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                            Toast.makeText(LoginActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                                     "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onError(String error) {
-                        Toast.makeText(LoginActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                        Toast.makeText(LoginActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                                 "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                     }
                 });
             }catch (JSONException e){
-                Toast.makeText(LoginActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                Toast.makeText(LoginActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                         "persistir, contate o administrador", Toast.LENGTH_LONG).show();
             }
         }

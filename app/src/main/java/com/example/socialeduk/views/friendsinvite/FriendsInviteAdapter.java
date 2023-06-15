@@ -81,25 +81,25 @@ public class FriendsInviteAdapter extends RecyclerView.Adapter<FriendsInviteAdap
                     }
 
                     if (acceptResponse.getData().equals("true")){
-                        Toast.makeText(context, "Solicitacao recusada com sucesso", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Solicitação recusada com sucesso!", Toast.LENGTH_LONG).show();
                         arrayList.remove(position);
                         notifyItemRemoved(position);
                     } else if (acceptResponse.getData().equals("null")) {
-                        Toast.makeText(context, "Solicitacao ja recusada ou nao encontrada", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Solicitação já recusada ou não encontrada!", Toast.LENGTH_LONG).show();
                     }else {
-                        Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                        Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                                 "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onError(String error) {
-                    Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                             "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                 }
             });
         }catch (JSONException e){
-            Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+            Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                     "persistir, contate o administrador", Toast.LENGTH_LONG).show();
         }
     }
@@ -129,25 +129,25 @@ public class FriendsInviteAdapter extends RecyclerView.Adapter<FriendsInviteAdap
                     }
 
                     if (acceptResponse.getData().equals("true")){
-                        Toast.makeText(context, "Solicitacao aceita com sucesso", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Solicitação aceita com sucesso!", Toast.LENGTH_LONG).show();
                         arrayList.remove(position);
                         notifyItemRemoved(position);
                     } else if (acceptResponse.getData().equals("null")) {
-                        Toast.makeText(context, "Usuario ja bloqueado ou nao encontrado", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Usuário já bloqueado ou não encontrado!", Toast.LENGTH_LONG).show();
                     }else {
-                        Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                        Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                                 "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onError(String error) {
-                    Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                             "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                 }
             });
         }catch (JSONException e){
-            Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+            Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                     "persistir, contate o administrador", Toast.LENGTH_LONG).show();
         }
     }
@@ -177,25 +177,25 @@ public class FriendsInviteAdapter extends RecyclerView.Adapter<FriendsInviteAdap
                     }
 
                     if (blockResponse.getData().equals("true")){
-                        Toast.makeText(context, "Usuario bloqueado com sucesso.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Usuário bloqueado com sucesso!", Toast.LENGTH_LONG).show();
                         arrayList.remove(position);
                         notifyItemRemoved(position);
                     } else if (blockResponse.getData().equals("null")) {
-                        Toast.makeText(context, "Usuario ja bloqueado ou nao encontrado", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Usuário já bloqueado ou não encontrado!", Toast.LENGTH_LONG).show();
                     }else {
-                        Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                        Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                                 "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onError(String error) {
-                    Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                             "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                 }
             });
         }catch (JSONException e){
-            Toast.makeText(context, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+            Toast.makeText(context, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                     "persistir, contate o administrador", Toast.LENGTH_LONG).show();
         }
     }

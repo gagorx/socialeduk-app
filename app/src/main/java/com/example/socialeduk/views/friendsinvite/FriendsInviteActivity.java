@@ -127,12 +127,12 @@ public class FriendsInviteActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(String error) {
-                    Toast.makeText(FriendsInviteActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                    Toast.makeText(FriendsInviteActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                             "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                 }
             });
         }catch(JSONException e) {
-            Toast.makeText(FriendsInviteActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+            Toast.makeText(FriendsInviteActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                     "persistir, contate o administrador", Toast.LENGTH_LONG).show();
         }
 

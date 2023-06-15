@@ -40,13 +40,13 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         if (username.isEmpty() || username.equals(" ")){
-           Toast.makeText(this, "O NOME DO USUARIO NAO PODE ESTAR VAZIO", Toast.LENGTH_LONG).show();
+           Toast.makeText(this, "O nome do usuário não pode estar vazio!", Toast.LENGTH_LONG).show();
         } else if (name.isEmpty() || name.equals(" ")) {
-           Toast.makeText(this, "O NOME NAO PODE ESTAR VAZIO", Toast.LENGTH_LONG).show();
+           Toast.makeText(this, "O nome não pode estar vazio!", Toast.LENGTH_LONG).show();
         }else if (email.isEmpty() || email.equals(" ")) {
-           Toast.makeText(this, "O EMAIL NAO PODE ESTAR VAZIO", Toast.LENGTH_LONG).show();
+           Toast.makeText(this, "O e-mail não pode estar vazio!", Toast.LENGTH_LONG).show();
         }else if (password.isEmpty() || password.equals(" ")) {
-           Toast.makeText(this, "O EMAIL NAO PODE ESTAR VAZIO", Toast.LENGTH_LONG).show();
+           Toast.makeText(this, "A senha não pode estar vazia!", Toast.LENGTH_LONG).show();
         }else{
             UserRegister user =  new UserRegister(username, password, name, email);
 
@@ -60,12 +60,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(String error) {
-                        Toast.makeText(RegisterActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                        Toast.makeText(RegisterActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                                 "persistir, contate o administrador", Toast.LENGTH_LONG).show();
                     }
                 });
             }catch (JSONException e){
-                Toast.makeText(RegisterActivity.this, "Algo de errado ocorreu. Por favor tente novamente. Se o erro " +
+                Toast.makeText(RegisterActivity.this, "Algo de errado ocorreu. Por favor, tente novamente. Se o erro " +
                         "persistir, contate o administrador", Toast.LENGTH_LONG).show();
             }
         }
