@@ -36,8 +36,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 public class FeedActivity extends AppCompatActivity {
@@ -133,7 +136,7 @@ public class FeedActivity extends AppCompatActivity {
 
                             newPost.setId(ob.getLong("id"));
                             newPost.setContent(ob.getString("content"));
-                            newPost.setCreateAt(ob.getLong("createdAt"));
+                            newPost.setCreateAt(ob.getString("createdAt"));
 
                             userJSON = ob.getJSONObject("user");
                             user.setId(userJSON.getLong("id"));
@@ -177,11 +180,20 @@ public class FeedActivity extends AppCompatActivity {
         listPost = posts.getData();
         ArrayList<PostContent> postContent = new ArrayList<>();
         JodaTime joda = new JodaTime();
-        Instant instant = Instant.parse(timestampString);
+        String time = "";
 
         for (int i = 0; i < listPost.size(); i++) {
-            Instant instant = Instant.parse(timestampString)
-            String time = joda.difference(listPost.get(i).getCreateAt());
+                Long timeInMs = 123456789L;
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                try {
+                    Date date = sdf.parse(listPost.get(i).getCreateAt());
+                    timeInMs = date.getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                time = joda.difference(timeInMs);
             postContent.add(new PostContent(R.mipmap.ic_iconunieduk, listPost.get(i).getUser().getUsername(), listPost.get(i).getContent(), time));
         }
         return postContent;

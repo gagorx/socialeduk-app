@@ -11,7 +11,7 @@ public class Post {
 
     private User user;
 
-    private Long createAt;
+    private String createAt;
 
 
     public Long getId() {
@@ -38,11 +38,11 @@ public class Post {
         this.user = user;
     }
 
-    public Long getCreateAt() {
+    public String getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Long createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 }
