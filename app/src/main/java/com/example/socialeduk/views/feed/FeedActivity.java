@@ -22,9 +22,11 @@ import com.example.socialeduk.models.dto.DefaultResponse;
 import com.example.socialeduk.models.dto.Post;
 import com.example.socialeduk.models.entities.User;
 import com.example.socialeduk.services.PostService;
-import com.example.socialeduk.services.UserService;
+import com.example.socialeduk.services.GetUserService;
 import com.example.socialeduk.sharedpreferences.UserPreferences;
 import com.example.socialeduk.views.events.EventsActivity;
+import com.example.socialeduk.views.feed.recycle_view.PostAdapter;
+import com.example.socialeduk.views.feed.recycle_view.PostContent;
 import com.example.socialeduk.views.friendsinvite.FriendsInviteActivity;
 import com.example.socialeduk.views.groups.GroupsActivity;
 import com.example.socialeduk.views.login.LoginActivity;
@@ -38,10 +40,8 @@ import org.json.JSONTokener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 
 public class FeedActivity extends AppCompatActivity {
 
@@ -58,7 +58,7 @@ public class FeedActivity extends AppCompatActivity {
 
     UserPreferences userPreferences;
     PostService postService;
-    UserService userService;
+    GetUserService getUserService;
 
 
     @Override
@@ -69,7 +69,7 @@ public class FeedActivity extends AppCompatActivity {
         //services
         userPreferences = new UserPreferences(FeedActivity.this);
         postService = new PostService(Volley.newRequestQueue(this));
-        userService = new UserService(Volley.newRequestQueue(this));
+        getUserService = new GetUserService(Volley.newRequestQueue(this));
 
         //botoes animados e textView
         logout = findViewById(R.id.feed_logout_button);

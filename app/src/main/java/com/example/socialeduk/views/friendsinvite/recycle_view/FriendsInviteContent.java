@@ -1,4 +1,4 @@
-package com.example.socialeduk.views.friendsinvite;
+package com.example.socialeduk.views.friendsinvite.recycle_view;
 
 import android.content.Context;
 import android.widget.Button;

@@ -1,4 +1,4 @@
-package com.example.socialeduk.views.feed;
+package com.example.socialeduk.views.feed.recycle_view;
 
 import android.view.LayoutInflater;
 import android.view.View;

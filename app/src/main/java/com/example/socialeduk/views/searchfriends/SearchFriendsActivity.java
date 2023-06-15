@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -18,9 +16,10 @@ import com.example.socialeduk.interfaces.VolleyCallBack;
 import com.example.socialeduk.models.dto.DefaultResponse;
 import com.example.socialeduk.models.entities.User;
 import com.example.socialeduk.services.SearchService;
-import com.example.socialeduk.services.UserService;
+import com.example.socialeduk.services.GetUserService;
 import com.example.socialeduk.sharedpreferences.UserPreferences;
-import com.example.socialeduk.views.feed.FeedActivity;
+import com.example.socialeduk.views.searchfriends.recycle_view.SearchUserContent;
+import com.example.socialeduk.views.searchfriends.recycle_view.SearchUsersAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +31,7 @@ import java.util.ArrayList;
 
 public class SearchFriendsActivity extends AppCompatActivity {
 
-    private UserService userService;
+    private GetUserService getUserService;
 
     private SearchService searchService;
 
@@ -46,7 +45,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_friends);
 
         userPreferences = new UserPreferences(SearchFriendsActivity.this);
-        userService = new UserService(Volley.newRequestQueue(this));
+        getUserService = new GetUserService(Volley.newRequestQueue(this));
         searchService = new SearchService(Volley.newRequestQueue(this));
 
         ImageButton back = findViewById(R.id.searchFriends_back_button);
@@ -102,7 +101,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
 
         DefaultResponse<ArrayList<User>> userList = new DefaultResponse<>();
         try {
-            userService.getAllUsers(new VolleyCallBack() {
+            getUserService.getAllUsers(new VolleyCallBack() {
             @Override
             public void onSuccess(String response) {
                 try {

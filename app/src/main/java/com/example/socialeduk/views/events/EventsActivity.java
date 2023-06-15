@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.socialeduk.R;
 import com.example.socialeduk.sharedpreferences.UserPreferences;
+import com.example.socialeduk.views.events.recycle_view.EventsAdapter;
+import com.example.socialeduk.views.events.recycle_view.EventsContent;
 import com.example.socialeduk.views.feed.FeedActivity;
 import com.example.socialeduk.views.friendsinvite.FriendsInviteActivity;
 import com.example.socialeduk.views.groups.GroupsActivity;

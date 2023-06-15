@@ -1,4 +1,4 @@
-package com.example.socialeduk.views.groups;
+package com.example.socialeduk.views.groups.recycle_view;
 
 public class GroupsContent {
 

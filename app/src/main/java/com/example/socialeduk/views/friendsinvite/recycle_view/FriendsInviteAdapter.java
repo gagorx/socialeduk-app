@@ -1,4 +1,4 @@
-package com.example.socialeduk.views.friendsinvite;
+package com.example.socialeduk.views.friendsinvite.recycle_view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,8 +18,8 @@ import com.example.socialeduk.interfaces.VolleyCallBack;
 import com.example.socialeduk.models.dto.AcceptAndRefuseFriendRequest;
 import com.example.socialeduk.models.dto.BlockAndSendFriendRequest;
 import com.example.socialeduk.models.dto.DefaultResponse;
-import com.example.socialeduk.services.UserService;
-import com.example.socialeduk.views.groups.GroupsAdapter;
+import com.example.socialeduk.services.BlockAndUnblockUserService;
+import com.example.socialeduk.services.FriendRequestService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,10 +63,10 @@ public class FriendsInviteAdapter extends RecyclerView.Adapter<FriendsInviteAdap
 
 
         DefaultResponse<String> acceptResponse = new DefaultResponse<>();
-        UserService userService = new UserService(Volley.newRequestQueue(context));
+        FriendRequestService friendRequestService = new FriendRequestService(Volley.newRequestQueue(context));
 
         try{
-            userService.refuseFriendRequest(request, new VolleyCallBack() {
+            friendRequestService.refuseFriendRequest(request, new VolleyCallBack() {
                 @Override
                 public void onSuccess(String response) {
                     JSONObject obj = null;
@@ -111,10 +111,10 @@ public class FriendsInviteAdapter extends RecyclerView.Adapter<FriendsInviteAdap
 
 
         DefaultResponse<String> acceptResponse = new DefaultResponse<>();
-        UserService userService = new UserService(Volley.newRequestQueue(context));
+        FriendRequestService friendRequestService = new FriendRequestService(Volley.newRequestQueue(context));
 
         try{
-            userService.acceptFriendRequest(request, new VolleyCallBack() {
+            friendRequestService.acceptFriendRequest(request, new VolleyCallBack() {
                 @Override
                 public void onSuccess(String response) {
                     JSONObject obj = null;
@@ -159,10 +159,10 @@ public class FriendsInviteAdapter extends RecyclerView.Adapter<FriendsInviteAdap
 
 
         DefaultResponse<String> blockResponse = new DefaultResponse<>();
-        UserService userService = new UserService(Volley.newRequestQueue(context));
+        BlockAndUnblockUserService blockUserService = new BlockAndUnblockUserService(Volley.newRequestQueue(context));
 
         try{
-            userService.blockUser(request, new VolleyCallBack() {
+            blockUserService.block(request, new VolleyCallBack() {
                 @Override
                 public void onSuccess(String response) {
                     JSONObject obj = null;

@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -16,12 +14,10 @@ import com.example.socialeduk.interfaces.VolleyCallBack;
 import com.example.socialeduk.models.dto.DefaultResponse;
 import com.example.socialeduk.models.entities.FriendRequest;
 import com.example.socialeduk.models.entities.User;
-import com.example.socialeduk.services.UserService;
+import com.example.socialeduk.services.FriendRequestService;
 import com.example.socialeduk.sharedpreferences.UserPreferences;
-import com.example.socialeduk.views.feed.FeedActivity;
-import com.example.socialeduk.views.searchfriends.SearchFriendsActivity;
-import com.example.socialeduk.views.searchfriends.SearchUserContent;
-import com.example.socialeduk.views.searchfriends.SearchUsersAdapter;
+import com.example.socialeduk.views.friendsinvite.recycle_view.FriendsInviteAdapter;
+import com.example.socialeduk.views.friendsinvite.recycle_view.FriendsInviteContent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,11 +25,10 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class FriendsInviteActivity extends AppCompatActivity {
 
-    private UserService userService;
+    private FriendRequestService friendRequestService;
     private UserPreferences userPreferences;
 
     @Override
@@ -42,7 +37,7 @@ public class FriendsInviteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_friends_invite);
 
         userPreferences = new UserPreferences(FriendsInviteActivity.this);
-        userService = new UserService(Volley.newRequestQueue(this));
+        friendRequestService = new FriendRequestService(Volley.newRequestQueue(this));
 
         ImageButton back = findViewById(R.id.friendsInvite_back_button);
         back.setOnClickListener(v -> startFeed());
@@ -72,7 +67,7 @@ public class FriendsInviteActivity extends AppCompatActivity {
 
         DefaultResponse<ArrayList<FriendRequest>> friendRequestList = new DefaultResponse<>();
         try {
-            userService.getAllReceivedFriendsRequests(userPreferences.getId(),new VolleyCallBack() {
+            friendRequestService.getAllReceivedFriendsRequests(userPreferences.getId(),new VolleyCallBack() {
                 @Override
                 public void onSuccess(String response) {
                     try {

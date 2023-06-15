@@ -17,6 +17,8 @@ import com.example.socialeduk.sharedpreferences.UserPreferences;
 import com.example.socialeduk.views.events.EventsActivity;
 import com.example.socialeduk.views.feed.FeedActivity;
 import com.example.socialeduk.views.friendsinvite.FriendsInviteActivity;
+import com.example.socialeduk.views.groups.recycle_view.GroupsAdapter;
+import com.example.socialeduk.views.groups.recycle_view.GroupsContent;
 import com.example.socialeduk.views.login.LoginActivity;
 import com.example.socialeduk.views.searchfriends.SearchFriendsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

@@ -1,4 +1,4 @@
-package com.example.socialeduk.views.searchfriends;
+package com.example.socialeduk.views.searchfriends.recycle_view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,7 +17,8 @@ import com.example.socialeduk.R;
 import com.example.socialeduk.interfaces.VolleyCallBack;
 import com.example.socialeduk.models.dto.BlockAndSendFriendRequest;
 import com.example.socialeduk.models.dto.DefaultResponse;
-import com.example.socialeduk.services.UserService;
+import com.example.socialeduk.services.BlockAndUnblockUserService;
+import com.example.socialeduk.services.FriendRequestService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,7 +50,7 @@ public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.
         holder.friendName.setText(user.getFriendName());
         holder.friendEmail.setText(user.getFriendEmail());
         holder.add.setOnClickListener(view -> sendFriendRequest(user.getMyId(), user.getFriendId(), user.getContext(), position));
-        holder.block.setOnClickListener(view -> blockFriend(user.getMyId(), user.getFriendId(), user.getContext(), position));
+        holder.block.setOnClickListener(view -> blockUser(user.getMyId(), user.getFriendId(), user.getContext(), position));
 
     }
 
@@ -58,12 +59,11 @@ public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.
         request.setSender(idSender);
         request.setReceiver(idRecivier);
 
-
         DefaultResponse<String> friendRequestResponse = new DefaultResponse<>();
-        UserService userService = new UserService(Volley.newRequestQueue(context));
+        FriendRequestService friendRequestService = new FriendRequestService(Volley.newRequestQueue(context));
 
         try{
-            userService.sendFriendRequest(request, new VolleyCallBack() {
+            friendRequestService.sendFriendRequest(request, new VolleyCallBack() {
                 @Override
                 public void onSuccess(String response) {
                     JSONObject obj = null;
@@ -101,17 +101,17 @@ public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.
         }
     }
 
-    private void blockFriend(Long idSender, Long idRecivier, Context context, int position) {
+    private void blockUser(Long idSender, Long idRecivier, Context context, int position) {
         BlockAndSendFriendRequest request = new BlockAndSendFriendRequest();
         request.setSender(idSender);
         request.setReceiver(idRecivier);
 
 
         DefaultResponse<String> blockResponse = new DefaultResponse<>();
-        UserService userService = new UserService(Volley.newRequestQueue(context));
+        BlockAndUnblockUserService blockUserService = new BlockAndUnblockUserService(Volley.newRequestQueue(context));
 
         try{
-            userService.blockUser(request, new VolleyCallBack() {
+            blockUserService.block(request, new VolleyCallBack() {
                 @Override
                 public void onSuccess(String response) {
                     JSONObject obj = null;

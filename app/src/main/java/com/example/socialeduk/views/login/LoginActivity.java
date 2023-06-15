@@ -2,9 +2,7 @@ package com.example.socialeduk.views.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Button;
@@ -12,13 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.Volley;
-import com.example.socialeduk.MainActivity;
 import com.example.socialeduk.R;
 import com.example.socialeduk.interfaces.VolleyCallBack;
 import com.example.socialeduk.models.dto.DefaultResponse;
 import com.example.socialeduk.models.dto.LoginRequest;
 import com.example.socialeduk.services.AuthService;
-import com.example.socialeduk.models.entities.User;
 import com.example.socialeduk.sharedpreferences.UserPreferences;
 import com.example.socialeduk.views.feed.FeedActivity;
 import com.example.socialeduk.views.register.RegisterActivity;

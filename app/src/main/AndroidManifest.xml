@@ -37,9 +37,6 @@
             android:name=".views.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".views.initalLoading.InitalLoadingScreen"
             android:exported="true">
             <intent-filter>

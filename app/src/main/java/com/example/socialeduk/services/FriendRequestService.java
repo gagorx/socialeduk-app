@@ -17,137 +17,14 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class UserService {
+
+public class FriendRequestService {
 
     public APIEnv env = new APIEnv();
     private RequestQueue _queue;
 
-    public UserService(RequestQueue queue) {
+    public FriendRequestService(RequestQueue queue) {
         this._queue = queue;
-    }
-
-
-
-    public void getAllUsers(VolleyCallBack callback)throws JSONException {
-
-        String url = env.getURI() + "/users/getAll";
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        callback.onSuccess(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        callback.onError(error.getMessage());
-                    }
-                });
-
-        _queue.add(stringRequest);
-
-    }
-
-    public void getUserById(Long id, VolleyCallBack callback)throws JSONException {
-
-        String url = env.getURI() + "/users/" + id;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        callback.onSuccess(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        callback.onError(error.getMessage());
-                    }
-                });
-
-        _queue.add(stringRequest);
-
-    }
-
-    public void sendFriendRequest(BlockAndSendFriendRequest request, VolleyCallBack callback)throws JSONException {
-        String url = env.getURI() + "/users/sendFriendRequest";
-
-        JSONObject jsonBody = new JSONObject();
-        jsonBody.put("sender", request.getSender());
-        jsonBody.put("receiver", request.getReceiver());
-
-        final String json = jsonBody.toString();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        callback.onSuccess(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        callback.onError(error.getMessage());
-                    }
-                }) {
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                try {
-                    return json.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding. Bytes of %s using %s", json, "utf-8");
-                    return null;
-                }
-            }
-
-        };
-        _queue.add(stringRequest);
-    }
-
-    public void blockUser(BlockAndSendFriendRequest request, VolleyCallBack callback)throws JSONException {
-        String url = env.getURI() + "/users/blockUser";
-
-        JSONObject jsonBody = new JSONObject();
-        jsonBody.put("sender", request.getSender());
-        jsonBody.put("receiver", request.getReceiver());
-
-        final String json = jsonBody.toString();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        callback.onSuccess(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        callback.onError(error.getMessage());
-                    }
-                }) {
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                try {
-                    return json.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding. Bytes of %s using %s", json, "utf-8");
-                    return null;
-                }
-            }
-
-        };
-        _queue.add(stringRequest);
     }
 
     public void getAllReceivedFriendsRequests(Long id, VolleyCallBack callback)throws JSONException {
@@ -250,6 +127,42 @@ public class UserService {
         _queue.add(stringRequest);
     }
 
+    public void sendFriendRequest(BlockAndSendFriendRequest request, VolleyCallBack callback)throws JSONException {
+        String url = env.getURI() + "/users/sendFriendRequest";
 
+        JSONObject jsonBody = new JSONObject();
+        jsonBody.put("sender", request.getSender());
+        jsonBody.put("receiver", request.getReceiver());
 
+        final String json = jsonBody.toString();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        callback.onSuccess(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.getMessage());
+                    }
+                }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return json.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding. Bytes of %s using %s", json, "utf-8");
+                    return null;
+                }
+            }
+
+        };
+        _queue.add(stringRequest);
+    }
 }

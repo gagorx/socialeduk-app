@@ -1,4 +1,4 @@
-package com.example.socialeduk.views.groups;
+package com.example.socialeduk.views.groups.recycle_view;
 
 import android.view.LayoutInflater;
 import android.view.View;

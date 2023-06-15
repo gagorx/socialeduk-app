@@ -28,7 +28,6 @@ public class AuthService {
     }
 
 
-
     public DefaultResponse<User> login(LoginRequest login, VolleyCallBack callback)throws JSONException {
         String url = env.getURI() + "/login";
 

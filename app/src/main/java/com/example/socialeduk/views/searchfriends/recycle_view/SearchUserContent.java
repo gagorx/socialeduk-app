@@ -1,4 +1,4 @@
-package com.example.socialeduk.views.searchfriends;
+package com.example.socialeduk.views.searchfriends.recycle_view;
 
 import android.content.Context;
 import android.util.Log;

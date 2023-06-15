@@ -1,4 +1,4 @@
-package com.example.socialeduk.views.events;
+package com.example.socialeduk.views.events.recycle_view;
 
 public class EventsContent {
 
